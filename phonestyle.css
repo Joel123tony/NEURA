@@ -1,0 +1,347 @@
+:root {
+    --theme-color: #e3e6f3;
+    --blue-color: #0071E3;
+    --black-color: #1D1D1F;
+    --green-color: hsl(176, 88%, 27%);
+    --purple-color: #6B31BB; 
+    --lite-black: #222;
+}
+
+.roboto-light {
+    font-family: "Roboto", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+/*@import url('https://fonts.googleapis.com/css?family=Spartan:wght@100;200;300;400;500; 600; 700; 800; 900&display=swap');*/
+
+.roboto-light {
+    font-family: "Roboto", serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+*{
+   margin:0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: "Roboto", serif;
+}
+
+h1{
+    font-size:55px;
+    line-height:64px;
+    color: #222;
+}
+
+h2 {
+    font-size: 50px;
+    line-height:54px;
+    color: #222;
+}
+
+h4{
+    font-size: 25px;
+    color: #222;
+}
+
+h6{
+    font-weight: 700;
+    font-size: 12px;
+    font-family:"roboto",serif;
+}
+
+p{
+    font-size:24px;
+    color:#222;
+    margin:15px 0 20px 0;
+    
+}
+p.ad{
+    padding: 0 0 0 0;
+}
+.section-p1{
+    padding: 40px 80px;
+}
+
+.section-m1{
+    margin: 40px 0;
+}
+
+body{
+    width: 100%;
+}
+
+
+/*header*/
+
+#header { 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 80px;
+    background: #e3e6f3;
+    box-shadow: 0 5px 15px rgb(0,0,0,0.06) ;
+    z-index:999;
+    position: sticky;
+    top:0;
+    left:0;
+    font-size: 20px;
+    color:var(--purple-color);
+    font-weight: 500;
+}
+
+#header a.brand{
+    font-family: "Roboto", serif;
+    text-decoration: none;
+    color: var(--purple-color);
+    text-shadow: 0 5px 15px rgb(0,0,0,0.06) ;
+}
+
+
+#nav-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav-bar li{
+    list-style: none;
+    padding: 0 20px;
+    position: relative;
+    font-weight:400px;
+
+}
+#nav-bar li a {
+    text-decoration: none;
+    font-size:16px;
+    font-weight:400px;
+    color:#222;
+    transition: 0.3s ease;
+}
+
+#nav-bar li a.cart{
+    position: relative;
+    right: 50px;
+}
+
+#nav-bar li a:hover,
+#nav-bar li a.active{
+    color: var(--purple-color);
+}
+
+#nav-bar li a.active::after,
+#nav-bar li a:hover::after{
+    content: "";
+    width: 30%;
+    height: 2px;
+    background-color:var(--purple-color);
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+}
+/*model*/
+.model{
+    display: flex;
+    justify-content: center;
+}
+.model a{
+    text-decoration: none;
+    padding-right:10px;
+    padding-top: 10px;
+    font-weight: 450;
+    color: var(--purple-color);
+}
+
+/*container*/
+.container {
+    display: flex;
+    margin-top:10px;
+}
+
+.product-display {
+    flex: 2;
+    background-color:var(--theme-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.product-images {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-images img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.product-thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.product-thumbnails img {
+    width: 90px;
+    height:100px;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.product-thumbnails img:hover, .product-thumbnails img.active {
+    border-color:var(--purple-color)
+}
+
+.product-details {
+    flex:2;
+    background-color:var(--theme-color);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.product-details h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+#product-description {
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+#product-description p {
+    color: #555;
+}
+#product-description p span{
+    color: #333;
+    text-decoration-line: line-through;
+    text-decoration-color:var(--purple-color)
+}
+.tst_btn{
+    display: block;
+    margin: 0 auto;
+    padding: 0.75em 1.25em;
+    background-color:#6B31BB;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top:20px;
+}
+
+
+
+.addToCartBtn {
+    background-color:var(--purple-color);
+    color:white; 
+    border: none; 
+    border-radius: 9px;
+    padding: 10px 20px; 
+    font-size: 16px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease;
+    margin-right:20px;
+}
+  
+  .addToCartBtn:hover {
+    background-color: #5f00b3; 
+  }
+
+
+/* Footer Styles */
+.footer {
+    background-color: var(--theme-color);
+    padding: 40px 80px;
+    color: var(--lite-black);
+    margin-top: 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer-section h4 {
+    font-size: 20px;
+    color: var(--purple-color);
+    margin-bottom: 15px;
+}
+
+.footer-section p {
+    font-size: 16px;
+    color: var(--lite-black);
+    margin: 10px 0;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 10px 0;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: var(--lite-black);
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--purple-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    color: var(--lite-black);
+}
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icons a {
+    color: #fff; /* Change color as needed */
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color:var(--purple-color); /* Change hover color as needed */
+}

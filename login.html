@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+       body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            display: flex;
+            width: 800px;
+            height: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .left {
+            background-color: #f5f5f5;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+        }
+
+        .left .wel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.2em;
+        }
+
+        .left .logo {
+            color: #6B31BB;
+            font-size: 100px;
+            padding-bottom: 150px;
+            margin-top: 0;
+        }
+
+        .left p {
+            font-size: 22px;
+            padding-left:5px;
+            margin-top:-165px;
+            letter-spacing:20px;
+        }
+
+        .right {
+            flex: 1.5;
+            background-color: #fff;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .right h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        form input {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        form input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .login-btn {
+            background-color:#6B31BB;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .login-btn:hover {
+            background-color: #5f00b3; 
+        }
+
+        .forgot-password {
+            text-align: right;
+            font-size: 0.8em;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            color: #6B31BB;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .social-login button {
+            flex: 1;
+            margin: 0 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            margin-bottom:15px;
+        }
+
+        .social-login button:hover {
+            background-color:#6B31BB;
+            color:white;
+            transition-duration:0.3s;
+        }
+
+        .register-link {
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .register-link a {
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .checkbox{
+            background-color:#6B31BB;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="wel">
+                <h4>Welcome!</h4>
+            </div>
+            <div class="logo">
+                <h1>N</h1>
+                <p>Neura</p>
+            </div>
+        </div>
+        <div class="right">
+            <!-- Login Form -->
+            <div id="login-form" class="form-container">
+                <h2>Log in</h2>
+                <form id="loginForm">
+                    <label for="email">Username</label>
+                    <input type="text" id="email" placeholder="Username" required>
+
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Password" required>
+
+                    <button type="submit" class="login-btn">Log in</button>
+                </form>
+                <div class="register-link">
+                    Not a member yet? <a href="#" id="show-register-form">Register now</a>
+                </div>
+            </div>
+
+            <!-- Registration Form (Hidden initially) -->
+            <div id="register-form" class="form-container" style="display: none;">
+                <h2>Register</h2>
+                <form id="registerForm">
+                    <label for="username">Username</label>
+                    <input type="text" id="register-username" placeholder="Username" required>
+
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" placeholder="Password" required>
+
+                    <button type="submit" class="login-btn">Register</button>
+                </form>
+
+                <div class="register-link">
+                    Already a member? <a href="#" id="show-login-form">Login now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    // Show Register Form
+    document.getElementById("show-register-form").addEventListener("click", function(event) {
+        event.preventDefault();
+        document.getElementById("login-form").style.display = "none";
+        document.getElementById("register-form").style.display = "block";
+    });
+
+    // Show Login Form
+    document.getElementById("show-login-form").addEventListener("click", function(event) {
+        event.preventDefault();
+        document.getElementById("register-form").style.display = "none";
+        document.getElementById("login-form").style.display = "block";
+    });
+
+    // Handle Register Form Submission
+    document.getElementById("registerForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("register-username").value;
+        const password = document.getElementById("register-password").value;
+
+        try {
+            const response = await fetch("http://localhost:5000/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.json();
+            alert(result.message);
+
+            if (result.message === "User registered successfully!") {
+                document.getElementById("register-form").style.display = "none";
+                document.getElementById("login-form").style.display = "block";
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+        }
+    });
+
+    // Handle Login Form Submission
+    document.getElementById("loginForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+            const response = await fetch("http://localhost:5000/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.json();
+            alert(result.message); // Show success/error message
+
+            if (result.token) {
+                localStorage.setItem("token", result.token); // Store token
+                localStorage.setItem("username", username); // Store username
+                window.location.href = "index.html"; // Redirect to homepage (index.html)
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert(error.message || "An error occurred. Please try again.");
+        }
+    });
+</script>
+</body>
+</html>

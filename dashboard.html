@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+    <p>You are successfully logged in.</p>
+    <button id="logout">Logout</button>
+
+    <script>
+        document.getElementById("logout").addEventListener("click", function () {
+            localStorage.removeItem("token"); // Clear stored token
+            window.location.href = "login.html"; // Redirect to login
+        });
+
+        // Protect the page: Redirect if no token is found
+        if (!localStorage.getItem("token")) {
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
