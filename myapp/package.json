@@ -1,4 +1,10 @@
 {
+  "start": "node server.js",
+  "build": "echo 'No build step needed' "
+}
+
+
+{
   "name": "myapp",
   "version": "1.0.0",
   "description": "",
