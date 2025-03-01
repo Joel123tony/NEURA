@@ -50,30 +50,43 @@
         </div>
     </section>
 
-    <!-- User Display -->
-    <script>
-        // Get username from localStorage
-        const username = localStorage.getItem('username');
-        const usernameDisplay = document.getElementById('usernameDisplay');
-        const userIcon = document.getElementById('userIcon');
-        
-        // Check if a username exists in localStorage
-        if (username) {
-            // Set the username in the span
-            usernameDisplay.textContent = username;
-            
-            // Show username when the user hovers over the icon
-            userIcon.addEventListener('mouseenter', () => {
-                usernameDisplay.style.display = 'inline';  // Show username on hover
-            });
+  <!-- JavaScript to Fetch Username from MongoDB -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        const token = localStorage.getItem("token");
+        const usernameDisplay = document.getElementById("usernameDisplay");
+        const userIcon = document.getElementById("userIcon");
 
-            // Hide username when the mouse leaves the icon
-            userIcon.addEventListener('mouseleave', () => {
-                usernameDisplay.style.display = 'none';   // Hide username when hover ends
-            });
+        if (token) {
+            try {
+                const response = await fetch("http://localhost:5000/user", {
+                    method: "GET",
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    usernameDisplay.textContent = data.username;
+                    usernameDisplay.style.display = "inline"; // Make username visible
+
+                    // Hover effect to show/hide username
+                    userIcon.addEventListener("mouseenter", () => {
+                        usernameDisplay.style.opacity = "1";  
+                    });
+
+                    userIcon.addEventListener("mouseleave", () => {
+                        usernameDisplay.style.opacity = "0";  
+                    });
+                } else {
+                    console.error("Error fetching user:", data.message);
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
         }
-    </script>
-
+    });
+</script>
     <!-- Hero Section -->
     <section id="hero">
         <div class="herocon">
@@ -104,54 +117,6 @@
                     <button>learn more</button>
                 </div>
                 <img src="slide-img.png" alt="">
-            </div>
-        </div>
-    </div>
-
-    <!-- Big Picture Section -->
-    <div class="bigpic">
-        <div class="container" style="text-align: center;">
-            <h2>Neura Laptop</h2>
-            <h3>Make It Professional</h3>
-            <ul>
-                <li>A professional laptop is a high-performance portable computer designed for business and productivity tasks.</li>
-                <li>It features powerful processors, ample RAM, and fast storage to handle multitasking and demanding software efficiently.</li>
-                <li>Professional laptops feature advanced security options like fingerprint readers and data encryption for protection.</li>
-            </ul>
-            <button>check now</button>
-        </div>
-    </div>
-
-    <!-- Product Images -->
-    <div class="image-container">
-        <h1>NEURA</h1>
-        <div class="phone-image-box">
-            <img src="n-phone 360/0068-assets/phone cover.jpg" alt="Phone Image">
-            <div class="overlay">Neura Phones</div>
-            <a href="phone.html"><button class="reveal-button1">BUY NOW</button></a>
-        </div>
-
-        <div class="laptop-image-box">
-            <button class="reveal-button2">BUY NOW</button>
-            <img src="n-phone 360/0068-assets/lap cover.jpg" alt="Laptop Image">
-            <div class="overlay">Neura Laptops</div>
-        </div>
-
-        <div class="tablet-image-box">
-            <img src="image3.jpg" alt="Tablet Image">
-            <div class="overlay">Neura Tablets</div>
-        </div>
-    </div>
-
-    <!-- Tablet Section -->
-    <div class="tablets">
-        <div class="t-container">
-            <div class="text">
-                <h1>SCALE UP YOUR PRODUCTIVITY</h1>
-                <p>with our</p>
-                <h3>NEURA Tablets</h3>
-                <button>visit now</button><br>
-                <img src="tab/tab-1.png" alt="Tablet">
             </div>
         </div>
     </div>
@@ -190,35 +155,6 @@
             <p>&copy; 2025 Neura-TechStore. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- Slides Script -->
-    <script>
-        let currentIndex = 0;
-
-        function showSlide(index) {
-            const slides = document.getElementById('slides');
-            const totalSlides = slides.children.length;
-            if (index >= totalSlides) {
-                currentIndex = 0;
-            } else if (index < 0) {git push -u origin main
-
-                currentIndex = totalSlides - 1;
-            } else {
-                currentIndex = index;
-            }
-            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        function nextSlide() {
-            showSlide(currentIndex + 1);
-        }
-
-        function prevSlide() {
-            showSlide(currentIndex - 1);
-        }
-
-        setInterval(nextSlide, 2000); // Auto slide every 2 seconds
-    </script>
 
     <script src="script.js"></script>
 </body>

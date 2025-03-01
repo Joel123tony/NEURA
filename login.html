@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Login & Register</title>
     <style>
        body {
             margin: 0;
@@ -106,41 +106,6 @@
             background-color: #5f00b3; 
         }
 
-        .forgot-password {
-            text-align: right;
-            font-size: 0.8em;
-            margin-top: -15px;
-            margin-bottom: 20px;
-            color: #6B31BB;
-        }
-
-        .social-login {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .social-login button {
-            flex: 1;
-            margin: 0 5px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #fff;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9em;
-            margin-bottom:15px;
-        }
-
-        .social-login button:hover {
-            background-color:#6B31BB;
-            color:white;
-            transition-duration:0.3s;
-        }
-
         .register-link {
             text-align: center;
             font-size: 0.9em;
@@ -150,9 +115,6 @@
             color: #000;
             text-decoration: none;
             font-weight: bold;
-        }
-        .checkbox{
-            background-color:#6B31BB;
         }
     </style>
 </head>
@@ -168,112 +130,121 @@
             </div>
         </div>
         <div class="right">
-            <!-- Login Form -->
-            <div id="login-form" class="form-container">
+            <div id="login-form">
                 <h2>Log in</h2>
                 <form id="loginForm">
-                    <label for="email">Username</label>
-                    <input type="text" id="email" placeholder="Username" required>
-
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Password" required>
-
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" required>
+                    
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                    
                     <button type="submit" class="login-btn">Log in</button>
                 </form>
                 <div class="register-link">
-                    Not a member yet? <a href="#" id="show-register-form">Register now</a>
+                    Not a member yet? <a href="#" id="show-register">Register now</a>
                 </div>
             </div>
 
-            <!-- Registration Form (Hidden initially) -->
-            <div id="register-form" class="form-container" style="display: none;">
+            <div id="register-form" style="display: none;">
                 <h2>Register</h2>
                 <form id="registerForm">
-                    <label for="username">Username</label>
-                    <input type="text" id="register-username" placeholder="Username" required>
-
+                    <label for="register-username">Username</label>
+                    <input type="text" id="register-username" required>
+                    
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                    
                     <label for="register-password">Password</label>
-                    <input type="password" id="register-password" placeholder="Password" required>
-
+                    <input type="password" id="register-password" required>
+                    
                     <button type="submit" class="login-btn">Register</button>
                 </form>
-
                 <div class="register-link">
-                    Already a member? <a href="#" id="show-login-form">Login now</a>
+                    Already a member? <a href="#" id="show-login">Login now</a>
                 </div>
             </div>
         </div>
     </div>
-    
     <script>
-    // Show Register Form
-    document.getElementById("show-register-form").addEventListener("click", function(event) {
-        event.preventDefault();
-        document.getElementById("login-form").style.display = "none";
-        document.getElementById("register-form").style.display = "block";
-    });
-
-    // Show Login Form
-    document.getElementById("show-login-form").addEventListener("click", function(event) {
-        event.preventDefault();
-        document.getElementById("register-form").style.display = "none";
-        document.getElementById("login-form").style.display = "block";
-    });
-
-    // Handle Register Form Submission
-    document.getElementById("registerForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-
-        const username = document.getElementById("register-username").value;
-        const password = document.getElementById("register-password").value;
-
-        try {
-            const response = await fetch("http://localhost:5000/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password })
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginForm = document.getElementById("login-form");
+            const registerForm = document.getElementById("register-form");
+            const showRegister = document.getElementById("show-register");
+            const showLogin = document.getElementById("show-login");
+    
+            // Show Register Form
+            showRegister.addEventListener("click", (event) => {
+                event.preventDefault();
+                loginForm.style.display = "none";
+                registerForm.style.display = "block";
             });
-
-            const result = await response.json();
-            alert(result.message);
-
-            if (result.message === "User registered successfully!") {
-                document.getElementById("register-form").style.display = "none";
-                document.getElementById("login-form").style.display = "block";
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("An error occurred. Please try again.");
-        }
-    });
-
-    // Handle Login Form Submission
-    document.getElementById("loginForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-
-        const username = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-
-        try {
-            const response = await fetch("http://localhost:5000/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password })
+    
+            // Show Login Form
+            showLogin.addEventListener("click", (event) => {
+                event.preventDefault();
+                registerForm.style.display = "none";
+                loginForm.style.display = "block";
             });
-
-            const result = await response.json();
-            alert(result.message); // Show success/error message
-
-            if (result.token) {
-                localStorage.setItem("token", result.token); // Store token
-                localStorage.setItem("username", username); // Store username
-                window.location.href = "index.html"; // Redirect to homepage (index.html)
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert(error.message || "An error occurred. Please try again.");
-        }
-    });
-</script>
+    
+            // Login Form Submission
+            document.getElementById("loginForm").addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const username = document.getElementById("login-username").value;
+                const password = document.getElementById("login-password").value;
+    
+                try {
+                    const response = await fetch("http://localhost:5000/login", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ username, password }),
+                    });
+    
+                    const data = await response.json();
+                    if (response.ok) {
+                        localStorage.setItem("token", data.token);
+                        alert("✅ Login successful!");
+                        window.location.href = "index.html";
+                    } else {
+                        alert(`❌ ${data.message}`);
+                    }
+                } catch (error) {
+                    console.error("Error logging in:", error);
+                    alert("❌ Server error. Please try again later.");
+                }
+            });
+    
+            // Register Form Submission
+            document.getElementById("registerForm").addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const username = document.getElementById("register-username").value;
+                const email = document.getElementById("register-email").value;
+                const password = document.getElementById("register-password").value;
+    
+                try {
+                    const response = await fetch("http://localhost:5000/register", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ username, email, password }),
+                    });
+    
+                    const data = await response.json();
+                    if (response.ok) {
+                        alert("✅ Registration successful! Please log in.");
+                        document.getElementById("registerForm").reset();
+                        registerForm.style.display = "none";
+                        loginForm.style.display = "block";
+                    } else {
+                        alert(`❌ ${data.message}`);
+                    }
+                } catch (error) {
+                    console.error("Error registering user:", error);
+                    alert("❌ Server error. Please try again later.");
+                }
+            });
+        });
+    </script>
+    
+    
 </body>
 </html>

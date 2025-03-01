@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neura Smart Phone</title>
+  <link rel="stylesheet" href="product.css">
+  <link rel="icon" type="image/x-icon" href="./favicon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.12.1/dist/umd/popper.min.js" integrity="sha384-fnwm4Rg9hjkiY/cu+EHJmeucy6x0b5oX4zUmbVYiXvsCzczdZYiB+4D5aYVb3zJuDfDTt" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+  <!-- Font Awesome and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <style>
+    /* Small inline fix for icon sizing */
+    .icon i {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <section id="header">
+    <a class="brand" href="index.html">NEURA</a>
+    <div class="nav-container">
+      <ul id="nav-bar">
+        <li><a href="index.html">Home</a></li>
+        <li><a  href="phone.html">Phone</a></li>
+        <li><a class="active" href="laptop.html">Laptop</a></li>
+        <li><a href="tab.html">Tablet</a></li>
+        <li class="icon"><a href="cart.html"><i class="fa fas fa-shopping-cart"></i></a></li>
+        <li class="icon" id="userIcon">
+          <a href="login.html"><i class="fas fa-user"></i></a>
+          <span id="usernameDisplay" style="display:none;"></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- User Display -->
+  <script>
+    const username = localStorage.getItem('username');
+    if (username) {
+      const userIcon = document.getElementById('userIcon');
+      const usernameDisplay = document.getElementById('usernameDisplay');
+      
+      userIcon.addEventListener('mouseenter', () => {
+        usernameDisplay.style.display = 'inline';  // Show username on hover
+        usernameDisplay.textContent = username;   // Display the username
+      });
+
+      userIcon.addEventListener('mouseleave', () => {
+        usernameDisplay.style.display = 'none';   // Hide username
+      });
+    }
+  </script>
+
+  <!-- Model Selection -->
+  <div class="model">
+    <a href="laptop.html">Neura Gen Book 1</a>
+    <a href="#">Neura Gen Book 2</a>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Product Display Section -->
+    <div class="product-display">
+      <div class="product-images">
+        <img id="main-image" src="n-lap 360/0001.png" alt="Product Image" style=""  >
+        <div class="product-thumbnails">
+          <img src="n-lap 360/0015.png" alt="Thumbnail 1" onclick="changeImage(this)" class="active">
+          <img src="n-lap 360/0022.png" alt="Thumbnail 2" onclick="changeImage(this)">
+          <img src="n-lap 360/0037.png" alt="Thumbnail 3" onclick="changeImage(this)">
+        </div>
+        <button class="tst_btn" onclick="start360View()">Start 360° View</button>
+      </div>
+    </div>
+
+    <!-- Product Details Section -->
+    <div class="product-details">
+      <h2>Product Description</h2>
+      <div id="product-description">
+        <p>This is the Neura Gen Book</p>
+        <p>
+            CPU Intel Core i5/Core | Screen resolution 1920 x 1080 | Ram 8GB | Storage 512GB SSD | Operating System Windows 10 Home
+        </p>
+        <p>MRP: <span>30,000</span> ₹20,000</p>
+      </div>
+      <button class="addToCartBtn" id="addToCartBtn">Add to Cart<i class="bi bi-bag-plus-fill"></i></button>
+      <a href="cart.html"><button class="addToCartBtn">View in Cart<i class="bi bi-cart-check-fill"></i></button></a>
+      <h4 style="margin-top:30px; color:#222; width:200px;">Review</h4>
+      <p> Rating: 4.5/5 <span style="color:#6B31BB; 
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);">★ ★ ★ ★ <span style="color: #222;">★</span> </span></p>
+    </div>
+  </div>
+
+  <!-- Add to Cart Script -->
+  <script>
+    document.getElementById('addToCartBtn').addEventListener('click', function() {
+      // Define product details
+      const product = { 
+        name: "NEURA-GEN BOOK 1", 
+        price:20000,     
+        quantity: 1 
+      };
+
+      // Retrieve the current cart from localStorage, or initialize an empty array
+      let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+
+      // Check if the product already exists in the cart
+      const existingProductIndex = cart.findIndex(item => item.name === product.name);
+      if (existingProductIndex !== -1) {
+        // Increase the quantity if product exists
+        cart[existingProductIndex].quantity += 1;
+      } else {
+        // Add new product to the cart
+        cart.push(product);
+      }
+
+      // Save the updated cart back to localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert("Product added to cart!");
+    });
+
+    // Image Change & 360° View Functions
+    function changeImage(imgElement) {
+      document.getElementById("main-image").src = imgElement.src;
+      document.querySelectorAll(".product-thumbnails img").forEach(img => img.classList.remove("active"));
+      imgElement.classList.add("active");
+    }
+    
+    let currentFrame = 1;
+    let totalFrames = 72; // Assuming 72 frames for smooth 360-degree rotation
+    let is360Active = false;
+
+    function start360View() {
+      if (is360Active) return;
+      is360Active = true;
+      const mainImage = document.getElementById("main-image");
+      const interval = setInterval(() => {
+        currentFrame++;
+        if (currentFrame > totalFrames) currentFrame = 1;
+        mainImage.src = `n-lap 360/${String(currentFrame).padStart(4, '0')}.png`;
+      }, 100);
+
+      setTimeout(() => {
+        clearInterval(interval);
+        is360Active = false;
+      }, 5000); // Stops after 5 seconds
+    }
+  </script>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>About Us</h4>
+        <p>We provide the best tech solutions for your needs.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>Email: Kurt@techstore.com</p>
+        <p>Phone: +123 456 7890</p>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="https://facebook.com " target="_blank"><i class="fa fa-facebook"></i></a>
+          <a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i></a>
+          <a href="https://instagram.com" target="_blank"><i class="fa fa-instagram"></i></a>
+          <a href="https://linkedin.com" target="_blank"><i class="fa fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Neura-TechStore. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -18,27 +18,20 @@
     </form>
 
     <script>
-    document.getElementById("registerForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
+     fetch('http://localhost:5000/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        username: 'testUser',
+        email: 'test@example.com',
+        password: 'securePassword123'
+    })
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+mongod
 
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-
-        try {
-            const response = await fetch("http://localhost:5000/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password })
-            });
-
-            const result = await response.json();
-            alert(result.message);
-            if (result.message === "User registered successfully!") {
-                window.location.href = "login.html"; // Redirect to login after successful registration
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            alert("An error occurred. Please try again.");
-        }
-    });
-   
+    </script>
+</body>
+</html>
