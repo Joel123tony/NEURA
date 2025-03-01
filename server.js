@@ -63,34 +63,32 @@ app.post('/register', async (req, res) => {
 });
 
 // 📌 **Login Route**
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
+app.post('/login', async (req, res) => {
     try {
-        const response = await fetch('http://localhost:5000/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        });
+        const { username, password } = req.body;
 
-        const data = await response.json();
-
-        if (response.ok) {
-            localStorage.setItem('token', data.token); // Save JWT token
-            document.getElementById('usernameDisplay').textContent = data.username; // Display username
-            window.location.href = "index.html"; // Redirect to homepage
-        } else {
-            alert(data.message);
+        if (!username || !password) {
+            return res.status(400).json({ message: "All fields are required!" });
         }
+
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(400).json({ message: "User not found!" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials!" });
+        }
+
+        const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+        res.status(200).json({ message: "Login successful!", token, username: user.username });
     } catch (error) {
-        console.error("Login error:", error);
-        alert("Server error. Please try again later.");
+        console.error("❌ Error in /login:", error.message);
+        res.status(500).json({ message: "Server error. Please try again later." });
     }
 });
-
 // Root Route (to check if server is running)
 app.get('/', (req, res) => {
     res.send("✅ API is running!");
