@@ -1,23 +1,19 @@
-"scripts": {
-  "start": "node server.js"
-}
 {
   "name": "myapp",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "body-parser": "^1.20.3",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "react-scripts": "^5.0.1"
   }
-}
-"scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build"
 }
