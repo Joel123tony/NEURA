@@ -1,5 +1,5 @@
 "scripts": {
-  "start": "node index.js"
+  "start": "node server.js"
 }
 {
   "name": "myapp",
@@ -16,4 +16,8 @@
     "body-parser": "^1.20.3",
     "express": "^4.21.2"
   }
+}
+"scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build"
 }
