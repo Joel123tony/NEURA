@@ -41,25 +41,6 @@
       </ul>
     </div>
   </section>
-
-  <!-- User Display -->
-  <script>
-    const username = localStorage.getItem('username');
-    if (username) {
-      const userIcon = document.getElementById('userIcon');
-      const usernameDisplay = document.getElementById('usernameDisplay');
-      
-      userIcon.addEventListener('mouseenter', () => {
-        usernameDisplay.style.display = 'inline';  // Show username on hover
-        usernameDisplay.textContent = username;   // Display the username
-      });
-
-      userIcon.addEventListener('mouseleave', () => {
-        usernameDisplay.style.display = 'none';   // Hide username
-      });
-    }
-  </script>
-
   <!-- Model Selection -->
   <div class="model">
     <a href="#">Neura Gen-1</a>
