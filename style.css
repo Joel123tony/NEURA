@@ -226,6 +226,7 @@ body{
 
 .slides {
     display: flex;
+    gap: 36px;
     max-width: 1180px;
     margin: 0 auto;
     transition: transform 0.45s ease;
@@ -831,6 +832,7 @@ body{
 
     .slides {
         max-width: 100%;
+        gap: 20px;
     }
 
     .slide-1,

@@ -4,6 +4,8 @@ let currentIndex = 0;
 
 function showSlide(index) {
     const slides = document.getElementById('slides');
+    if (!slides) return;
+
     const totalSlides = slides.children.length;
     if (index >= totalSlides) {
         currentIndex = 0;
@@ -12,7 +14,11 @@ function showSlide(index) {
     } else {
         currentIndex = index;
     }
-    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    const firstSlide = slides.children[0];
+    const slideGap = parseFloat(getComputedStyle(slides).gap) || 0;
+    const slideWidth = firstSlide.getBoundingClientRect().width;
+    slides.style.transform = `translateX(-${currentIndex * (slideWidth + slideGap)}px)`;
 }
 
 function nextSlide() {
@@ -21,6 +27,7 @@ function nextSlide() {
 
 // Auto slide every 5 seconds
 setInterval(nextSlide, 5000);
+window.addEventListener('resize', () => showSlide(currentIndex));
 
 //phone
 
