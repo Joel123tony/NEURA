@@ -38,22 +38,59 @@
 
   <!-- Main Cart Content -->
   <main>
-    <h1>Your Cart</h1>
-    <table id="cartTable" class="product-table">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Cart items will be rendered here -->
-      </tbody>
-    </table>
-    <h2 id="grandTotal"></h2>
-    <button id="submitOrder">Submit Order</button>
+    <section class="cart-hero">
+      <div>
+        <p class="eyebrow">NEURA checkout</p>
+        <h1>Your Cart</h1>
+        <p class="cart-copy">Review your devices and place your order when everything looks right.</p>
+      </div>
+      <div class="cart-badge">
+        <i class="fa fas fa-shopping-cart"></i>
+        <span id="itemCount">0 items</span>
+      </div>
+    </section>
+
+    <section class="cart-layout">
+      <div class="cart-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Order Items</h2>
+            <p>Products saved from your NEURA shopping session.</p>
+          </div>
+        </div>
+
+        <div class="table-shell">
+          <table id="cartTable" class="product-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Cart items will be rendered here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <aside class="summary-card">
+        <p class="eyebrow">Summary</p>
+        <h2 id="grandTotal">Grand Total: ₹0</h2>
+        <div class="summary-line">
+          <span>Delivery</span>
+          <strong>Free</strong>
+        </div>
+        <div class="summary-line">
+          <span>Warranty</span>
+          <strong>Included</strong>
+        </div>
+        <button id="submitOrder">Submit Order</button>
+        <a class="continue-link" href="index.html">Continue shopping</a>
+      </aside>
+    </section>
   </main>
 
   <!-- JavaScript for Cart Functionality -->
@@ -80,7 +117,16 @@
         tbody.appendChild(row);
       });
 
+      const itemCount = cart.reduce((sum, product) => sum + product.quantity, 0);
       document.getElementById('grandTotal').textContent = "Grand Total: ₹" + grandTotal;
+      document.getElementById('itemCount').textContent = itemCount === 1 ? "1 item" : itemCount + " items";
+
+      if (cart.length === 0) {
+        const row = document.createElement('tr');
+        row.className = "empty-row";
+        row.innerHTML = `<td colspan="4">Your cart is empty. Add a NEURA phone, laptop, or tablet to begin.</td>`;
+        tbody.appendChild(row);
+      }
     }
 
     // Initial render of the cart
