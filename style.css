@@ -28,15 +28,24 @@
    font-family: "Roboto", serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 h1{
-    font-size:55px;
-    line-height:64px;
+    font-size: clamp(34px, 4vw, 55px);
+    line-height: 1.08;
     color: #222;
 }
 
 h2 {
-    font-size: 50px;
-    line-height:54px;
+    font-size: clamp(30px, 3.6vw, 50px);
+    line-height: 1.08;
     color: #222;
 }
 
@@ -52,7 +61,7 @@ h6{
 }
 
 p{
-    font-size:24px;
+    font-size: clamp(16px, 2vw, 24px);
     color:#222;
     margin:15px 0 20px 0;
     
@@ -118,7 +127,7 @@ body{
     font-size:16px;
     font-weight:400px;
     color:#222;
-    transition: 0.3s ease;
+    transition: color 0.25s ease, transform 0.25s ease;
 }
 
 #nav-bar li a.cart{
@@ -129,6 +138,10 @@ body{
 #nav-bar li a:hover,
 #nav-bar li a.active{
     color: var(--purple-color);
+}
+
+#nav-bar li a:hover {
+    transform: translateY(-1px);
 }
 
 #nav-bar li a.active::after,
@@ -145,14 +158,21 @@ body{
 
 #hero {
     background-image:url(hero-bg.jpg);
-    height: 108vh;
+    min-height: calc(100vh - 88px);
+    min-height: calc(100svh - 88px);
     width: 100%;
     background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 0 80px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+}
+
+#hero .herocon {
+    max-width: min(620px, 100%);
 }
 
 #hero h4{
@@ -173,11 +193,13 @@ body{
     padding: 10px 20px; 
     font-size: 16px;
     cursor: pointer; 
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 #hero button:hover {
     background-color: #5f00b3; 
+    box-shadow: 0 12px 24px rgba(107, 49, 187, 0.22);
+    transform: translateY(-2px);
 }
 
 #hero button:focus {
@@ -234,12 +256,13 @@ body{
     padding: 7px 14px; 
     font-size: 20px; 
     cursor: pointer; 
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     margin-left: 10px; 
 }
 
 .slide-1 button:hover {
     background-color: #5f00b3; 
+    transform: translateY(-2px);
 }
 
 .slide-1 button:focus {
@@ -283,12 +306,13 @@ body{
     padding: 7px 14px; 
     font-size: 20px; 
     cursor: pointer; 
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     margin-left: 10px; 
 }
 
 .slide-2 button:hover {
     background-color: #5f00b3; 
+    transform: translateY(-2px);
 }
 
 .slide-2 button:focus {
@@ -390,7 +414,7 @@ body{
     overflow: hidden;
     border: 1px solid #ccc;
     border-radius:100%; /* Initially no rounded corners */
-    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    transition: border-radius 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
 }
 
@@ -577,6 +601,44 @@ body{
     color:var(--purple-color); /* Change hover color as needed */
 }
 
+@media (prefers-reduced-motion: no-preference) {
+    #hero .herocon {
+        animation: heroTextIn 0.75s ease both;
+    }
+
+    .slide-1,
+    .slide-2,
+    .phone-image-box,
+    .laptop-image-box,
+    .tablet-image-box {
+        animation: softRise 0.65s ease both;
+    }
+}
+
+@keyframes heroTextIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes softRise {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 /*phone-page*/
 /*laptop-page*/
@@ -627,10 +689,13 @@ body{
     }
 
     #hero {
-        min-height: 560px;
+        min-height: calc(100vh - 82px);
+        min-height: calc(100svh - 82px);
         height: auto;
-        padding: 80px 32px;
-        background-position: center;
+        padding: 52vh 32px 72px;
+        background-size: auto 58vh;
+        background-size: auto min(58svh, 680px);
+        background-position: right 8% top 28px;
     }
 
     .slide-2 {
@@ -712,13 +777,18 @@ body{
     }
 
     #hero {
-        min-height: 500px;
-        padding: 56px 20px;
-        background-position: 58% center;
+        min-height: calc(100vh - 98px);
+        min-height: calc(100svh - 98px);
+        padding: 50vh 20px 48px;
+        padding: 50svh 20px 48px;
+        background-size: auto 48vh;
+        background-size: auto min(48svh, 430px);
+        background-position: right top 18px;
+        justify-content: flex-start;
     }
 
     #hero .herocon {
-        max-width: 280px;
+        max-width: 100%;
     }
 
     #hero button,
@@ -760,5 +830,26 @@ body{
 
     .social-icons {
         justify-content: flex-start;
+    }
+}
+
+@media (max-width: 380px) {
+    #nav-bar {
+        gap: 6px;
+    }
+
+    #nav-bar li {
+        padding: 0 4px;
+    }
+
+    #nav-bar li a {
+        font-size: 13px;
+    }
+
+    #hero {
+        padding-top: 47vh;
+        padding-top: 47svh;
+        background-size: auto 45vh;
+        background-size: auto min(45svh, 380px);
     }
 }

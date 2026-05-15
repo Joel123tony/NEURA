@@ -53,11 +53,11 @@
     <!-- Product Display Section -->
     <div class="product-display">
       <div class="product-images">
-        <img id="main-image" src="n-lap 360/0001.png" alt="Product Image" style=""  >
+        <img id="main-image" src="n-lap 360/0001.png" alt="Product Image" fetchpriority="high" decoding="async">
         <div class="product-thumbnails">
-          <img src="n-lap 360/0015.png" alt="Thumbnail 1" onclick="changeImage(this)" class="active">
-          <img src="n-lap 360/0022.png" alt="Thumbnail 2" onclick="changeImage(this)">
-          <img src="n-lap 360/0037.png" alt="Thumbnail 3" onclick="changeImage(this)">
+          <img src="n-lap 360/0015.png" alt="Thumbnail 1" onclick="changeImage(this)" class="active" loading="lazy" decoding="async">
+          <img src="n-lap 360/0022.png" alt="Thumbnail 2" onclick="changeImage(this)" loading="lazy" decoding="async">
+          <img src="n-lap 360/0037.png" alt="Thumbnail 3" onclick="changeImage(this)" loading="lazy" decoding="async">
         </div>
         <button class="tst_btn" onclick="start360View()">Start 360° View</button>
       </div>
