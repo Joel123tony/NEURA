@@ -80,6 +80,7 @@ p.ad{
 body{
     width: 100%;
     overflow-x: hidden;
+    background-color: var(--theme-color);
 }
 
 
@@ -779,24 +780,26 @@ body{
     #hero {
         min-height: calc(100vh - 98px);
         min-height: calc(100svh - 98px);
-        padding: 50vh 20px 48px;
-        padding: 50svh 20px 48px;
-        background-size: auto 48vh;
-        background-size: auto min(48svh, 430px);
-        background-position: right top 18px;
+        padding: 390px 22px 56px;
+        background-color: var(--theme-color);
+        background-size: 650px auto;
+        background-position: right top 22px;
         justify-content: flex-start;
     }
 
     #hero .herocon {
         max-width: 100%;
+        background: transparent;
     }
 
     #hero button,
     .slide-1 button,
     .slide-2 button {
-        width: 100%;
-        max-width: 180px;
+        width: auto;
+        min-width: 132px;
+        max-width: none;
         font-size: 16px;
+        border-radius: 14px;
         margin-left: 0;
     }
 
@@ -847,9 +850,8 @@ body{
     }
 
     #hero {
-        padding-top: 47vh;
-        padding-top: 47svh;
-        background-size: auto 45vh;
-        background-size: auto min(45svh, 380px);
+        padding-top: 340px;
+        background-size: 560px auto;
+        background-position: right top 18px;
     }
 }
